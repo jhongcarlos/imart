@@ -212,7 +212,7 @@
 
               if (isset($_POST['btn_search'])) {
                 $search = $_POST['search'];
-                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE name = '$search'");
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE name LIKE '%{$search}%'");
               }
               else{
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0");
