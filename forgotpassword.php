@@ -1,6 +1,13 @@
 
 <?php 
-  ob_start();
+  include('server.php');
+
+  // if($_SESSION['category'] == "saveditem"){
+
+  //     header("location: ")
+
+  //    $_SESSION['category'] = "";
+  // }
 
  ?>
 <!DOCTYPE html>
@@ -63,25 +70,6 @@
         </div>
       </div>
     </nav>
-    <div style="display: none;">
-      <?php
-       include('server.php');
-
-      // if($_SESSION['category'] == "saveditem"){
-
-      //     header("location: ")
-
-      //    $_SESSION['category'] = "";
-      // }
-       $message = "";
-      if (!empty($_GET['email'])) {
-        $message = "We have sent an email, please check your email account.";
-        $_SESSION['forgot_email'] = $_GET['email'];
-        include('phpMailer.php');
-        phpMailerGMAIL1();
-      }
-   ?>
-    </div>
 
     <!-- Page Content -->
     <div class="container" style="margin-top: 100px">
@@ -91,25 +79,17 @@
         <div class="col-md-12">
             
          <div id="first">
-              <h1 class="text-center">Login</h1>
-              <center><code><?php echo $message; ?></code></center>
-                   <form action="" method="post" style="width: 50%;margin: 0 auto">
+              <h1 class="text-center">Forgot Password</h1>
+                   <form action="login.php" method="get" style="width: 50%;margin: 0 auto; margin-top: 50px">
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Email address</label>
+                              <label for="exampleInputEmail1">Enter your Email address</label>
                               <input type="email" name="email"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
                            </div>
-                           <div class="form-group">
-                              <label for="exampleInputEmail1">Password</label>
-                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password" required>
-                           </div>
                            <div class="text-center ">
-                              <button type="submit" name = "btnlogin" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Submit</button>
                            </div>
                            <div class="form-group">
-                              <p class="text-center">Don't have account? <a href="register.php" id="signup">Sign up here</a></p>
-                           </div>
-                           <div class="form-group">
-                              <p class="text-center"><a href="forgotpassword.php" id="signup">Forgot Password</a></p>
+                              <p class="text-center"><a href="login.php" id="signup">Login here</a></p>
                            </div>
                         </form>
                  
