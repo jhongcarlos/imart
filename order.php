@@ -1,6 +1,10 @@
 <?php 
   ob_start();
   include('server.php');
+
+  $sql = mysqli_query($db,"SELECT * FROM tbl_products");
+  $num = mysqli_num_rows($sql);
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -168,25 +172,6 @@
               </div>
             </div>
           </form>
-
-          <form action="" method="post" class="form-group">
-            <code>Number of displayed items</code>
-            <div class="row">
-              <div class="col-md-10">
-                <select class="form-control" name="limit">
-                  <option>All</option>
-                  <option>10</option>
-                  <option>20</option>
-                  <option>50</option>
-                  <option>100</option>
-                  <option>200</option>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <button class="btn btn-info " name="btn_limit">Display</button>
-              </div>
-            </div>
-          </form>
           <div class="row">
 
              
@@ -233,27 +218,34 @@
                 $search = $_POST['search'];
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE name LIKE '%{$search}%'");
               }
-              if (isset($_POST['btn_limit'])) {
-                $limit = $_POST['limit'];
-                if ($limit == "10") {
-                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 10");
-                }
-                elseif ($limit == "20") {
-                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 20");
-                }
-                elseif ($limit == "50") {
-                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 50");
-                }
-                elseif ($limit == "100") {
-                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 100");
-                }
-                elseif ($limit == "200") {
-                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 200");
-                }
-                else{
-                  $sql = mysqli_query($db, "SELECT * FROM tbl_products");
-                }
+             if (isset($_POST['one'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 1,10");
               }
+              elseif (isset($_POST['two'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 11,10");
+              }
+              elseif (isset($_POST['three'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 21,10");
+              }
+              elseif (isset($_POST['four'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 31,10");
+              }
+              elseif (isset($_POST['five'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 41,10");
+              }
+              elseif (isset($_POST['six'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 51,10");
+              }
+              elseif (isset($_POST['seven'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 61,10");
+              }
+              elseif (isset($_POST['eight'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 71,10");
+              }
+              elseif (isset($_POST['nine'])) {
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 80,10");
+              }
+
               else{
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0");
               }
@@ -292,17 +284,44 @@
               </div>
             </div>
             <?php } ?>
-            
 
           </div>
           <!-- /.row -->
-
+          <form action="" method="post">
+          <div class="row" align="center" style="margin-bottom: 10px">
+            <div class="col-md-12">
+              <button class="btn btn-info" name="one">1</button>
+              <?php if ($num > 10 && $num < 100) { ?>
+              <button class="btn btn-info" name="two">2</button>
+            <?php }else{}
+            if ($num > 21 && $num < 100) { ?>
+              <button class="btn btn-info" name="three">3</button>
+              <?php }else{}
+            if ($num > 31 && $num < 100) { ?>
+              <button class="btn btn-info" name="four">4</button>
+              <?php }else{}
+            if ($num > 41 && $num < 100) { ?>
+              <button class="btn btn-info" name="five">5</button>
+              <?php }else{}
+            if ($num > 51 && $num < 100) { ?>
+              <button class="btn btn-info" name="six">6</button>
+              <?php }else{}
+            if ($num > 61 && $num < 100) { ?>
+              <button class="btn btn-info" name="seven">7</button>
+              <?php }else{}
+            if ($num > 71 && $num < 100) { ?>
+              <button class="btn btn-info" name="eight">8</button>
+              <?php }else{}
+            if ($num > 81 && $num < 100) { ?>
+              <button class="btn btn-info" name="nine">9</button>
+            <?php }else{} ?>
+            </div>          
+          </div>
+          </form>
         </div>
         <!-- /.col-lg-9 -->
-
       </div>
       <!-- /.row -->
-
     </div>
    
 
