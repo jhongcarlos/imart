@@ -1,5 +1,8 @@
 <?php   ob_start();
   include('server.php');
+  if (empty($_SESSION['email'])) {
+    header('Location:login.php');
+  }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,15 +81,16 @@
           <h1 class="my-4">iMart</h1>
           <div class="list-group">
             <form action="" method="post">
-            <a class="list-group-item"><button name="all" class="btn btn-warning">All</button></a>
-            <a class="list-group-item"><button name="fruit" class="btn btn-warning">Fruits</button></a>
-            <a class="list-group-item"><button name="vegetables" class="btn btn-warning">Vegetables</button></a>
-            <a class="list-group-item"><button name="protein"class="btn btn-warning">Protein</button></a>
-            <a class="list-group-item"><button name="dairy" class="btn btn-warning">Dairy</button></a>
-            <a class="list-group-item"><button name="grains" class="btn btn-warning">Grains</button></a>
-            <a class="list-group-item"><button name="snacks" class="btn btn-warning">Snacks</button></a>
-              <a class="list-group-item"><button name="saved" class="btn btn-warning fa fa-heart"> View Saved Items</button></a>
-                <a class="list-group-item"><button name="history" class="btn btn-warning">History (Orders)</button></a>
+            <a class="list-group-item"><button name="all" class="btn btn-warning btn-block">All</button></a>
+            <a class="list-group-item"><button name="fruit" class="btn btn-warning btn-block">Fruits</button></a>
+            <a class="list-group-item"><button name="vegetables" class="btn btn-warning btn-block">Vegetables</button></a>
+            <a class="list-group-item"><button name="protein"class="btn btn-warning btn-block">Protein</button></a>
+            <a class="list-group-item"><button name="dairy" class="btn btn-warning btn-block">Dairy</button></a>
+            <a class="list-group-item"><button name="grains" class="btn btn-warning btn-block">Grains</button></a>
+            <a class="list-group-item"><button name="snacks" class="btn btn-warning btn-block">Snacks</button></a>
+              <a class="list-group-item"><button name="saved" class="btn btn-warning btn-block fa fa-heart"> View Saved Items</button></a>
+                <a class="list-group-item"><button name="history" class="btn btn-warning btn-block">History (Orders)</button></a>
+                <a class="list-group-item"><button name="logout" class="btn btn-warning btn-block">Logout</button></a>
             </form>
             
           </div>

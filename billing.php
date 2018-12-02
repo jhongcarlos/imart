@@ -1,6 +1,8 @@
 <?php   ob_start();
   include('server.php');
-
+  if (empty($_SESSION['final_total'])) {
+    header('Location:order.php');
+  }
 
  ?>
 <!DOCTYPE html>
