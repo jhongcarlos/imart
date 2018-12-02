@@ -168,6 +168,25 @@
               </div>
             </div>
           </form>
+
+          <form action="" method="post" class="form-group">
+            <code>Number of displayed items</code>
+            <div class="row">
+              <div class="col-md-10">
+                <select class="form-control" name="limit">
+                  <option>All</option>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>50</option>
+                  <option>100</option>
+                  <option>200</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-info " name="btn_limit">Display</button>
+              </div>
+            </div>
+          </form>
           <div class="row">
 
              
@@ -213,6 +232,27 @@
               if (isset($_POST['btn_search'])) {
                 $search = $_POST['search'];
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE name LIKE '%{$search}%'");
+              }
+              if (isset($_POST['btn_limit'])) {
+                $limit = $_POST['limit'];
+                if ($limit == "10") {
+                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 10");
+                }
+                elseif ($limit == "20") {
+                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 20");
+                }
+                elseif ($limit == "50") {
+                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 50");
+                }
+                elseif ($limit == "100") {
+                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 100");
+                }
+                elseif ($limit == "200") {
+                  $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 200");
+                }
+                else{
+                  $sql = mysqli_query($db, "SELECT * FROM tbl_products");
+                }
               }
               else{
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0");
