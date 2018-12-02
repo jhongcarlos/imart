@@ -181,7 +181,7 @@
               $_SESSION['category'] = "all";
             }
               elseif ($_SESSION['category'] == "all") {
-                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0 LIMIT 9");
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0");
                 $_SESSION['col'] = "btn-danger";
               }
               elseif ($_SESSION['category'] == "bread") {
@@ -218,7 +218,7 @@
                 $search = $_POST['search'];
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE name LIKE '%{$search}%'");
               }
-             elseif (isset($_POST['one'])) {
+             if (isset($_POST['one'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 1,10");
               }
               elseif (isset($_POST['two'])) {
