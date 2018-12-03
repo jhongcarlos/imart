@@ -98,14 +98,14 @@
           <h1 class="my-4">iMart</h1>
           <div class="list-group">
             <form action="" method="post">
-            <a class="list-group-item"><button name="all" class="btn btn-warning btn-block">All</button></a>
-            <a class="list-group-item"><button name="bread" class="btn btn-warning btn-block">Breads</button></a>
-            <a class="list-group-item"><button name="beverages" class="btn btn-warning btn-block">Beverages</button></a>
-            <a class="list-group-item"><button name="protein"class="btn btn-warning btn-block">Protein</button></a>
-            <a class="list-group-item"><button name="dairy" class="btn btn-warning btn-block">Dairy</button></a>
-            <a class="list-group-item"><button name="grains" class="btn btn-warning btn-block">Grains</button></a>
-            <a class="list-group-item"><button name="snacks" class="btn btn-warning btn-block">Snacks</button></a>
-            <a class="list-group-item"><button name="others" class="btn btn-warning btn-block">Others</button></a>
+            <a class="list-group-item"><button name="all" class="btn <?php if(empty($_SESSION['btn_all'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">All</button></a>
+            <a class="list-group-item"><button name="bread" class="btn <?php if(empty($_SESSION['btn_bread'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Breads</button></a>
+            <a class="list-group-item"><button name="beverages" class="btn <?php if(empty($_SESSION['btn_beverage'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Beverages</button></a>
+            <a class="list-group-item"><button name="protein"class="btn <?php if(empty($_SESSION['btn_protein'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Protein</button></a>
+            <a class="list-group-item"><button name="dairy" class="btn <?php if(empty($_SESSION['btn_dairy'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Dairy</button></a>
+            <a class="list-group-item"><button name="grains" class="btn <?php if(empty($_SESSION['btn_grain'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Grains</button></a>
+            <a class="list-group-item"><button name="snacks" class="btn <?php if(empty($_SESSION['btn_snack'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Snacks</button></a>
+            <a class="list-group-item"><button name="others" class="btn <?php if(empty($_SESSION['btn_other'])){echo 'btn-warning';}else{echo 'btn-danger';} ?> btn-block">Others</button></a>
             <?php if (!empty($_SESSION['email'])) {
               # code...?>
             <a class="list-group-item"><button name="saved" class="btn btn-warning fa fa-heart btn-block"> View Saved Items</button></a>
@@ -181,35 +181,92 @@
               $_SESSION['category'] = "all";
             }
               if ($_SESSION['category'] == "all") {
-                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0");
-                $_SESSION['col'] = "btn-danger";
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0 LIMIT 9");
+                $_SESSION['btn_all'] = "1";
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_snack']);
+                unset($_SESSION['btn_other']);
               }
               if ($_SESSION['category'] == "bread") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Bread' AND stock != 0");
-                $_SESSION['col'] = "btn-danger";
+                $_SESSION['btn_bread'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_snack']);
+                unset($_SESSION['btn_other']);
               }
               elseif ($_SESSION['category'] == "beverages") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Beverages' AND stock != 0");
-                $_SESSION['col'] = "btn-danger";
+                $_SESSION['btn_beverage'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_snack']);
+                unset($_SESSION['btn_other']);
               }
               elseif ($_SESSION['category'] == "protein") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Protein' AND stock != 0");
-                $_SESSION['col'] = "btn-danger";
+                $_SESSION['btn_protein'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_snack']);
+                unset($_SESSION['btn_other']);
               }
               elseif ($_SESSION['category'] == "dairy") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Dairy' AND stock != 0");
-                $_SESSION['col'] = "btn-danger";
+                $_SESSION['btn_dairy'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_snack']);
+                unset($_SESSION['btn_other']);
               }
               elseif ($_SESSION['category'] == "grains") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Grain' AND stock != 0 ");
-                $_SESSION['col'] = "btn-danger";
+                $_SESSION['btn_grain'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_snack']);
+                unset($_SESSION['btn_other']);
               }
               elseif ($_SESSION['category'] == "snacks") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Snack' AND stock != 0");
-                $_SESSION['col'] = "btn-danger";
+                $_SESSION['btn_snack'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_other']);
               }
                elseif ($_SESSION['category'] == "others") {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE Category = 'Others' AND stock != 0");
+                $_SESSION['btn_other'] = "1";
+                unset($_SESSION['btn_all']);
+                unset($_SESSION['btn_bread']);
+                unset($_SESSION['btn_beverage']);
+                unset($_SESSION['btn_protein']);
+                unset($_SESSION['btn_dairy']);
+                unset($_SESSION['btn_grain']);
+                unset($_SESSION['btn_snack']);
               }
               else{
 
@@ -220,34 +277,115 @@
               }
              elseif (isset($_POST['one'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 1,10");
+                $_SESSION['btn_one'] = "1";
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['two'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 11,10");
+                $_SESSION['btn_two'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['three'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 21,10");
+                $_SESSION['btn_three'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['four'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 31,10");
+                $_SESSION['btn_four'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['five'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 41,10");
+                $_SESSION['btn_five'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['six'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 51,10");
+                $_SESSION['btn_six'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['seven'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 61,10");
+                $_SESSION['btn_seven'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_eight']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['eight'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 71,10");
+                $_SESSION['btn_eight'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_nine']);
               }
               elseif (isset($_POST['nine'])) {
                 $sql = mysqli_query($db, "SELECT * FROM tbl_products LIMIT 80,10");
+                $_SESSION['btn_nine'] = "1";
+                unset($_SESSION['btn_one']);
+                unset($_SESSION['btn_two']);
+                unset($_SESSION['btn_three']);
+                unset($_SESSION['btn_four']);
+                unset($_SESSION['btn_five']);
+                unset($_SESSION['btn_six']);
+                unset($_SESSION['btn_seven']);
+                unset($_SESSION['btn_eight']);
               }
 
               else{
-                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0");
+                $sql = mysqli_query($db, "SELECT * FROM tbl_products WHERE stock != 0 LIMIT 9");
               }
               }
               while ($row = mysqli_fetch_assoc($sql)) {
@@ -290,30 +428,30 @@
           <form action="" method="post">
           <div class="row" align="center" style="margin-bottom: 10px">
             <div class="col-md-12">
-              <button class="btn btn-info" name="one">1</button>
+              <button class="btn <?php if(empty($_SESSION['btn_one'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="one">1</button>
               <?php if ($num > 10 && $num < 100) { ?>
-              <button class="btn btn-info" name="two">2</button>
+              <button class="btn <?php if(empty($_SESSION['btn_two'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="two">2</button>
             <?php }else{}
             if ($num > 21 && $num < 100) { ?>
-              <button class="btn btn-info" name="three">3</button>
+              <button class="btn <?php if(empty($_SESSION['btn_three'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="three">3</button>
               <?php }else{}
             if ($num > 31 && $num < 100) { ?>
-              <button class="btn btn-info" name="four">4</button>
+              <button class="btn <?php if(empty($_SESSION['btn_four'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="four">4</button>
               <?php }else{}
             if ($num > 41 && $num < 100) { ?>
-              <button class="btn btn-info" name="five">5</button>
+              <button class="btn <?php if(empty($_SESSION['btn_five'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="five">5</button>
               <?php }else{}
             if ($num > 51 && $num < 100) { ?>
-              <button class="btn btn-info" name="six">6</button>
+              <button class="btn <?php if(empty($_SESSION['btn_six'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="six">6</button>
               <?php }else{}
             if ($num > 61 && $num < 100) { ?>
-              <button class="btn btn-info" name="seven">7</button>
+              <button class="btn <?php if(empty($_SESSION['btn_seven'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="seven">7</button>
               <?php }else{}
             if ($num > 71 && $num < 100) { ?>
-              <button class="btn btn-info" name="eight">8</button>
+              <button class="btn <?php if(empty($_SESSION['btn_eight'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="eight">8</button>
               <?php }else{}
             if ($num > 81 && $num < 100) { ?>
-              <button class="btn btn-info" name="nine">9</button>
+              <button class="btn <?php if(empty($_SESSION['btn_nine'])){echo 'btn-info';}else{echo 'btn-danger';} ?>" name="nine">9</button>
             <?php }else{} ?>
             </div>          
           </div>
